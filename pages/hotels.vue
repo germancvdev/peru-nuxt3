@@ -1,11 +1,9 @@
 <template>
   <div>
-    <h1>Blog</h1>
+    <h1>Hotels</h1>
   </div>
 </template>
 
-<script setup>
-console.log("BLOG");
-</script>
+<script setup></script>
 
 <style lang="scss" scoped></style>

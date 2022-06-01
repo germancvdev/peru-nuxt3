@@ -1,12 +1,12 @@
 import { defineStore } from "pinia";
 
 interface State {
-  type: String; // success, error, warning, info. etc
+  type: string; // success, error, warning, info. etc
   duration: number;
   isShow: Boolean;
   isActive: Boolean;
   title: string;
-  message: "";
+  message: string;
   timeout: NodeJS.Timeout;
 }
 

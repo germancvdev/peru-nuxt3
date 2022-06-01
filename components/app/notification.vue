@@ -8,7 +8,7 @@
       },
       notification.type,
     ]"
-    class="absolute text-white w-72 rounded-lg shadow-2xl transition-all hover:cursor-pointer p-2"
+    class="fixed z-50 text-white w-72 rounded-lg shadow-2xl transition-all hover:cursor-pointer p-2"
   >
     <button
       class="absolute -top-2 -right-2 bg-transparent hover:scale-105 transition-all"
