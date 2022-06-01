@@ -4,7 +4,6 @@ import { useNotification } from "~~/stores/notification";
 export default defineNuxtPlugin(() => {
   const config = useRuntimeConfig().public;
   const cookie = useCookie("auth.token");
-
   const noti = useNotification();
 
   const api: $Fetch = $fetch.create({
@@ -12,9 +11,8 @@ export default defineNuxtPlugin(() => {
     headers: {
       Authorization: `Bearer ${cookie.value}`,
     },
-    onResponse: async ({ options, request }) => {
-      if (!options.method) return;
-      console.log(options.method);
+    onResponse: async ({ options }) => {
+      if (!options.method || !process.client) return;
 
       switch (options.method) {
         case "POST":
@@ -38,13 +36,14 @@ export default defineNuxtPlugin(() => {
             message: "Successfully deleted",
           });
           return noti.show();
-
         default:
           return;
       }
     },
 
     onResponseError: async ({ response }) => {
+      if (!process.client) return;
+
       const { message, name, statusCode } = response._data.error;
       noti.$patch({
         title: `${name} ${statusCode}`,
