@@ -12,7 +12,10 @@ export default defineNuxtPlugin(() => {
     headers: {
       Authorization: `Bearer ${cookie.value}`,
     },
-    onResponse: async ({ options }) => {
+    onResponse: async ({ options, request }) => {
+      if (!options.method) return;
+      console.log(options.method);
+
       switch (options.method) {
         case "POST":
           noti.$patch({
