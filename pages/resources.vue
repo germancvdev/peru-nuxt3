@@ -121,11 +121,13 @@
         </form>
       </div>
     </div>
+
+    <app-btn @click="refresh">refresh</app-btn>
   </div>
 </template>
 
 <script setup lang="ts">
-const { items, pending, update, item, add, del, dialog, loading } =
+const { items, pending, update, item, add, del, dialog, loading, refresh } =
   await useApi("/places/");
 </script>
 

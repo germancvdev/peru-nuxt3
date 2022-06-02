@@ -1,22 +1,33 @@
 <template>
   <div>
     <h1>Hello</h1>
-    <div>
-      <pre>{{ items }}</pre>
+
+    <div class="dark:bg-red-800 bg-purple-400 py-4 px-2 rounded-lg shadow-lg">
+      <h1>Princess!</h1>
     </div>
+    <div
+      id="chartdiv"
+      class="bg-purple-200 dark:bg-slate-700 rounded-lg shadow-2xl mt-3"
+    ></div>
   </div>
 </template>
 
-<script setup lang="ts">
-// const { $api } = useNuxtApp();
+<script setup>
+const colorMode = useColorMode();
 
-// const { data } = await useAsyncData("places", async () => {
-//   const res = await $api("/places");
-//   return res;
-// });
+onBeforeMount(() => {
+  const { drawing, changeTheme } = useChart(colorMode.value, "chartdiv");
+  drawing();
 
-const { items, pending, update, item, add, del, dialog, loading } =
-  await useApi("/places/");
+  watch(colorMode, (v) => {
+    changeTheme(v.value);
+  });
+});
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss">
+#chartdiv {
+  width: 100%;
+  height: 500px;
+}
+</style>

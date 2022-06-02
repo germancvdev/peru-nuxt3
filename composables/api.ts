@@ -1,15 +1,10 @@
+import { Global } from "@/interfaces/global";
+
 export const useApi = async (path: string) => {
   const item = ref<Global>({});
   const dialog = ref(false);
   const loading = ref(false);
 
-  interface Global {
-    id?: string;
-    name?: string;
-    image?: string;
-    images?: string[];
-    description?: string;
-  }
   const { $api } = useNuxtApp();
 
   async function add() {
@@ -61,7 +56,11 @@ export const useApi = async (path: string) => {
     error,
     refresh,
   } = await useLazyAsyncData<Global[]>(path, async () => {
-    const res = await $api(path);
+    const res = await $api(path, {
+      params: {
+        "filter[limit]": 6,
+      },
+    });
     return res;
   });
 

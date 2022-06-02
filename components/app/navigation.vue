@@ -1,14 +1,14 @@
 <template>
   <header>
     <div
-      class="fixed md:relative w-full bg-primary-300 bg-opacity-90 h-16 z-20 md:bg-primary-50"
+      class="fixed md:relative w-full bg-primary-300 bg-opacity-90 h-16 z-20 md:bg-primary-50 flex items-center"
     >
       <div class="container mx-auto flex justify-between items-center">
         <p class="pl-2 text-lg font-bold text-white md:text-primary-500">
           Logo
         </p>
 
-        <nav>
+        <nav class="hidden md:block">
           <ul class="flex">
             <li
               v-for="(item, index) in items"
@@ -20,6 +20,15 @@
                 {{ item.name }}
                 <i :class="[item.icon, 'text-sm']"></i
               ></nuxt-link>
+            </li>
+
+            <li class="items-center justify-center transition-all py-4">
+              <div>
+                <select v-model="$colorMode.preference">
+                  <option value="light">Light</option>
+                  <option value="dark">Dark</option>
+                </select>
+              </div>
             </li>
           </ul>
         </nav>
@@ -33,6 +42,7 @@
       :class="[
         {
           '!left-0': show,
+          'opacity-0': !show,
         },
       ]"
       class="transition-all top-0 -left-[100%] fixed z-10 h-screen w-screen bg-primary-50 flex justify-center"

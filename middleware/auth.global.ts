@@ -1,7 +1,6 @@
 export default defineNuxtRouteMiddleware(async (to, from) => {
   if (to.path !== from.path) return;
 
-  console.log("defineNuxtRouteMiddleware");
   const { $api } = useNuxtApp();
 
   const token = useCookie("token");
