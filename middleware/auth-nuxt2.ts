@@ -1,7 +1,4 @@
-export default defineNuxtRouteMiddleware(async (to, from) => {
-  if (to.path !== from.path) return;
-
-  console.log("defineNuxtRouteMiddleware");
+export default async function ({ path }) {
   const { $api } = useNuxtApp();
 
   const token = useCookie("token");
@@ -14,7 +11,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
     .then((x) => x)
     .catch((_) => ({}));
 
-  if (!id && to.path !== "/login") {
+  if (!id && path !== "/login") {
     return navigateTo("/login");
   }
-});
+}

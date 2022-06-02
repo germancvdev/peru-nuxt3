@@ -1,10 +1,11 @@
 <template>
   <div
-    v-if="notification.isActive"
     :class="[
       {
         notification: notification.isShow,
         'notification-close': !notification.isShow,
+        'opacity-0': !notification.isActive,
+        'opacity-100': notification.isActive,
       },
       notification.type,
     ]"

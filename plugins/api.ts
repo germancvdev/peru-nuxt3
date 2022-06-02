@@ -1,10 +1,9 @@
 import { $Fetch, $fetch } from "ohmyfetch";
-import { useNotification } from "~~/stores/notification";
+import { useNotification } from "@/stores/notification";
 
-export default defineNuxtPlugin(() => {
+export default defineNuxtPlugin(({ $pinia }) => {
   const config = useRuntimeConfig().public;
-  const cookie = useCookie("auth.token");
-  const noti = useNotification();
+  const cookie = useCookie("token");
 
   const api: $Fetch = $fetch.create({
     baseURL: config.BASE_URL,
@@ -13,6 +12,8 @@ export default defineNuxtPlugin(() => {
     },
     onResponse: async ({ options }) => {
       if (!options.method || !process.client) return;
+
+      const noti = useNotification($pinia);
 
       switch (options.method) {
         case "POST":
@@ -41,16 +42,18 @@ export default defineNuxtPlugin(() => {
       }
     },
 
-    onResponseError: async ({ response }) => {
-      if (!process.client) return;
+    onResponseError: async ({ response, options, request, error }) => {
+      if (process.client) {
+        const noti = useNotification($pinia);
 
-      const { message, name, statusCode } = response._data.error;
-      noti.$patch({
-        title: `${name} ${statusCode}`,
-        type: "error",
-        message,
-      });
-      noti.show();
+        const { message, name, statusCode } = response._data.error;
+        noti.$patch({
+          title: `${name} ${statusCode}`,
+          type: "error",
+          message,
+        });
+        noti.show();
+      }
     },
   });
   return {
