@@ -104,11 +104,11 @@ export default {
 // BTN
 
 .btn-primary {
-  @apply bg-primary-500 active:bg-primary-400 active:shadow-primary-50 shadow-primary-100 shadow-lg;
+  @apply bg-primary-500 active:bg-primary-400 active:shadow-primary-50 shadow-primary-300 shadow-md dark:shadow-none;
 }
 
 .btn-secondary {
-  @apply bg-secondary-500 active:bg-secondary-400 active:shadow-secondary-50 shadow-secondary-100 shadow-lg;
+  @apply bg-secondary-500 active:bg-secondary-400 active:shadow-secondary-50 shadow-secondary-300 shadow-lg dark:shadow-sm;
 }
 
 .btn-error {

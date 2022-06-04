@@ -56,12 +56,12 @@ export const useApi = async (path: string) => {
     error,
     refresh,
   } = await useLazyAsyncData<Global[]>(path, async () => {
-    const res = await $api(path, {
+    const { results } = await $api(path, {
       params: {
         "filter[limit]": 6,
       },
     });
-    return res;
+    return results;
   });
 
   return {

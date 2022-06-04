@@ -6,6 +6,7 @@ interface State {
   lastName: string;
   userId: number | null;
   loading: boolean;
+  loadingRegister: boolean;
   auth: Auth;
 }
 
@@ -20,6 +21,7 @@ export const useAuthUserStore = defineStore("auth/user", {
     lastName: "",
     userId: 10,
     loading: false,
+    loadingRegister: false,
     auth: {
       email: "",
       password: "",
@@ -57,7 +59,7 @@ export const useAuthUserStore = defineStore("auth/user", {
       const { $api } = useNuxtApp();
       const noti = useNotification();
 
-      this.loading = true;
+      this.loadingRegister = true;
 
       try {
         await $api("/signup/", {
@@ -77,7 +79,7 @@ export const useAuthUserStore = defineStore("auth/user", {
 
         noti.show();
       }
-      this.loading = false;
+      this.loadingRegister = false;
     },
   },
 });

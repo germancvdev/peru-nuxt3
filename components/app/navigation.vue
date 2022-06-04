@@ -24,7 +24,7 @@
 
             <li class="items-center justify-center transition-all py-4">
               <div>
-                <select v-model="$colorMode.preference">
+                <select v-model="colorMode.value">
                   <option value="light">Light</option>
                   <option value="dark">Dark</option>
                 </select>
@@ -67,6 +67,8 @@
 </template>
 
 <script setup lang="ts">
+const colorMode = useColorMode();
+
 const show = ref(false);
 interface Item {
   name: string;
